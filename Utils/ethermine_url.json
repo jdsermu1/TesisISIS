@@ -1,0 +1,5 @@
+{
+  "raven_coin": "https://api-ravencoin.flypool.org",
+  "ethereum": "https://api.ethermine.org",
+  "ethereum_classic": "https://api-etc.ethermine.org"
+}
