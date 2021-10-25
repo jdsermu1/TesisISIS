@@ -20,7 +20,7 @@ data_dir = os.path.join(base_dir, "Data", mining_coin, timestamp)
 wallet = json.load(open(os.path.join(base_dir, "Utils", "wallet.json")))
 urls = json.load(open(os.path.join(base_dir, "Utils", "ethermine_url.json")))
 timedelta = 10
-max_length = 2
+max_length = 100
 os.makedirs(data_dir)
 assert timedelta > 9
 
@@ -54,8 +54,8 @@ class CSVWriter(threading.Thread):
 
 
 def retrieve_psutil_data(data_dict:dict):
-    data_dict["cpu_load"] = psutil.cpu_percent()
-    data_dict["cpu_freq"] = psutil.cpu_freq().current
+    data_dict["cpu_load"] = round(psutil.cpu_percent(), 2)
+    data_dict["cpu_freq"] = round(psutil.cpu_freq().current, 2)
     data_dict["memory_usage"] = psutil.virtual_memory().used
     data_dict["cpu_temp"] = psutil.sensors_temperatures()["k10temp"][0].current
 
@@ -72,7 +72,7 @@ def retrieve_miner_data(data_dict:dict):
     req = requests.get(f"{urls[mining_coin]}/miner/{wallet[mining_coin]}/currentStats")
     data = req.json() if req.status_code == 200 else {}
     data = data["data"] if not isinstance(data["data"], str) else {}
-    data_dict["hashrate"] = data.get("currentHashrate", np.nan)
+    data_dict["hashrate"] = round(data.get("currentHashrate", np.nan), 2)
     data_dict["unpaid"] = data.get("unpaid", np.nan)
 
 
