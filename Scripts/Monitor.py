@@ -14,7 +14,7 @@ import threading
 ##
 
 mining_coin = "ethereum_classic"
-timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H-%M-%S")
 base_dir = os.path.join("..")
 data_dir = os.path.join(base_dir, "Data", mining_coin, timestamp)
 wallet = json.load(open(os.path.join(base_dir, "Utils", "wallet.json")))
