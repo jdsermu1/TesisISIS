@@ -1,7 +1,9 @@
 {
-  "bitcoin": "bc1q4c328qsawc2055zyz5gmya84felhnyxkclefk7",
   "ethereum": "0x1909af9d43b8577C964551106c67D0D29147F736",
   "ethereum_classic": "0xde8412e7ABAfD54f46d3b46E806e84150F0e9e09",
   "raven_coin": "RT3sy29RYu5skA2KmhHPUWwF647yvsn5zr",
-  "nice_hash": "3FxCpkk9r5SWFDR4WRfvTwYspvQJMkzrsw"
+  "zcash": "t1XttD6sUN5wQRHC3gUouAAUyqajnqFJaTQ",
+  "litecoin": "LMYfCSLXFbQmGpedqsBuXWhmf4pZ6hTsPn",
+  "beam": "9DfkirZYqjTSuHBGYKxb3ifi8PAqNTBjQTKomzq8eCijZSVWf3mRMNJm1hFW9w65v5gfjdNrBXH46hvvmoY5819UR3gFAVNuxrQdMxUAxdBCutNDNb9hWdp42sYciNfYYj4yWKd1gcUL6RzRYNnr4JKmsnQQimn3do1LKRqh74Ny7DPFwsahPaNWyBeccwgewaPGHszfGHrYci45GQBqYDQtbbEnc2J4z9oKXj6wNmYdQbifmwHpsCfEPgWcxzK6aQYZvVrFnCqqVJbJUFbNi6HtaCzWudNJmbTfLLHw5BBPWL7rjTbrkDzRZD71MEv1rRHvbmrLfdUVQKBeC5uv1i1YZ4SgWyN2xejPqcH95PPhnQmHmmRRUfWrfQZxEW8RSMdV5aUu1GhWLbnPegEwT56vYfz2Reki8PdWi26eSjQXHpLmFDXFRFWaGo2FEwxqZyd5qjZ1mj6qHqvHrD",
+  "firo": "aFKS7NfnptLw3gExH3jTdFR3y55ejBqzmA"
 }
