@@ -3,7 +3,5 @@
   "ethereum": "https://api.ethermine.org",
   "ethereum_classic": "https://api-etc.ethermine.org",
   "zcash": "https://api-zcash.flypool.org",
-  "beam": "https://api-beam.flypool.org",
-
-
+  "beam": "https://api-beam.flypool.org"
 }
