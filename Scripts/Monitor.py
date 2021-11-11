@@ -13,7 +13,7 @@ import threading
 
 ##
 
-mining_coin = "ethereum_classic"
+mining_coin = "ergo"
 timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H-%M-%S")
 base_dir = os.path.join("..")
 data_dir = os.path.join(base_dir, "Data", mining_coin, timestamp)
@@ -57,7 +57,7 @@ def retrieve_psutil_data(data_dict:dict):
     data_dict["cpu_load"] = round(psutil.cpu_percent(), 2)
     data_dict["cpu_freq"] = round(psutil.cpu_freq().current, 2)
     data_dict["memory_usage"] = psutil.virtual_memory().used
-    data_dict["cpu_temp"] = psutil.sensors_temperatures()["k10temp"][0].current
+    data_dict["cpu_temp"] = psutil.sensors_temperatures()["coretemp"][0].current
 
 
 
@@ -72,7 +72,7 @@ def retrieve_miner_data(data_dict:dict):
     req = requests.get(f"{urls[mining_coin]}/miner/{wallet[mining_coin]}/currentStats")
     data = req.json() if req.status_code == 200 else {}
     data = data["data"] if not isinstance(data["data"], str) else {}
-    data_dict["hashrate"] = round(data.get("currentHashrate", np.nan), 2)
+    data_dict["hashrate"] = round(data.get("currentHashrate", np.nan), 2) if data.get("currentHashrate", np.nan) else np.nan
     data_dict["unpaid"] = data.get("unpaid", np.nan)
 
 
