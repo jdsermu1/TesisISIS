@@ -13,7 +13,7 @@ import threading
 
 ##
 
-mining_coin = "ethereum_classic"
+mining_coin = "beam"
 timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H-%M-%S")
 base_dir = os.path.join("..")
 data_dir = os.path.join(base_dir, "Data", mining_coin, timestamp)
