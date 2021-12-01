@@ -4,8 +4,9 @@ import requests
 import json
 import time
 
+##
 
-base_dir = os.path.join("..", "Data")
+base_dir = os.path.join("", "Data")
 stats_file = os.path.join(base_dir, "stats.json")
 miner_stats_url = "https://api.minerstat.com/v2/coins"
 crypto_currencies = ["RVN", "ETH", "ETC", "ERG", "BTC"]
@@ -69,6 +70,32 @@ def load_stats():
         save_stats(stats)
         return stats
 
+
+current_stats = load_stats()
+
+
+##
+
+def save_constant_stats():
+
+
+def save_coin_stats(coin):
+    for coin_data in coins_stats["data"]:
+        if not miner.get(coin_data["coin"]):
+            print(f"No miner data for {coin_data['coin']}")
+        else:
+            income = calculate_time_reward_coin(coin_data, miner[coin_data["coin"]], period)
+            print(f"Income for {coin_data['coin']}: {income} USD")
+
+def save_stats():
+    save_coin_stats()
+    save_constant_stats()
+
+
+
+
+
+
 ##
 
 
@@ -78,10 +105,10 @@ def calculate_mean_time_block(coin_name, difficulty, nethash):
 
 def calculate_time_reward_coin(coin_stats, miner_coin_stats, period):
     hashrate_share = miner_coin_stats["hashrate"] / (miner_coin_stats["hashrate"] + coin_stats["network_hashrate"])
-    daily_blocks = 24*60**2 / calculate_mean_time_block(coin_stats["coin"],
+    period_blocks = period*60**2 / calculate_mean_time_block(coin_stats["coin"],
                                                         coin_stats["difficulty"], coin_stats["network_hashrate"])
-    daily_currency = daily_blocks * coin_stats["reward_block"]
-    expected_currency = daily_currency * hashrate_share * (1 - miner_coin_stats["pool_fee"])
+    period_currency = period_blocks * coin_stats["reward_block"]
+    expected_currency = period_currency * hashrate_share * (1 - miner_coin_stats["pool_fee"])
     revenue = expected_currency * coin_stats["price"]
     powerExpenses = period * miner_coin_stats["power_consumption"] * miner_coin_stats["power_price"]
     income = revenue - powerExpenses
@@ -98,7 +125,7 @@ def calculate_time_reward_all_coins(coins_stats, miner, period=24):
             print(f"Income for {coin_data['coin']}: {income} USD")
 
 
-current_stats = load_stats()
+
 calculate_time_reward_all_coins(current_stats, miner_stats)
 
 

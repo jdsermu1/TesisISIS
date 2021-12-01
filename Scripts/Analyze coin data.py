@@ -139,61 +139,61 @@ def show_metric(ax, x_name, y_name, df_name, xlabel=None, ylabel=None, title=Non
     ax.set_ylabel(ylabel if ylabel else y_name)
     ax.set_title(title if title else f"{y_name} vs. {x_name}")
 
-## Grafica de uso de la ram
+# Grafica de uso de la ram
 
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "memory_usage", "monitor", ylabel="Bytes", xlabel="Hora",
-#             title="Uso de memoria RAM vs. Tiempo", loc="lower right")
-# fig.show()
-#
-# ## Grafica de uso de la CPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "cpu_load", "monitor", ylabel="%", xlabel="Hora",
-#             title="Carga de la CPU vs. Tiempo", smooth=True)
-# fig.show()
-#
-# ## Grafica de temperatura de la CPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "cpu_temp", "monitor", ylabel="C", xlabel="Hora",
-#             title="Temperatura de la CPU vs. Tiempo", smooth=True)
-# fig.show()
-#
-# ## Grafica de frecuencia de la CPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "cpu_freq", "monitor", ylabel="Hz", xlabel="Hora",
-#             title="Frecuencia de la CPU vs. Tiempo", smooth=True)
-# fig.show()
-#
-# ## Grafica de uso de la GPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "gpu_load", "monitor", ylabel="%", xlabel="Hora",
-#             title="Carga de la GPU vs. Tiempo")
-# fig.show()
-#
-# ## Grafica de temperatura de la GPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "gpu_temp", "monitor", ylabel="C", xlabel="Hora",
-#             title="Temperatura de la GPU vs. Tiempo")
-# fig.show()
-#
-# ## Grafica de uso de memoria de la GPU
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "gpu_memory_usage", "monitor", ylabel="Bytes", xlabel="Hora",
-#             title="Uso de memoria de la GPU vs. Tiempo")
-# fig.show()
-#
-# ## Grafica de consumo de potencia
-#
-# fig, axes = plt.subplots()
-# show_metric(axes, "relative_hour", "Power", "power", ylabel="W", xlabel="Hora",
-#             title="Consumo de potencia vs. Tiempo")
-# fig.show()
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "memory_usage", "monitor", ylabel="Bytes", xlabel="Hora",
+            title="Uso de memoria RAM vs. Tiempo", loc="lower right")
+fig.show()
+
+## Grafica de uso de la CPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "cpu_load", "monitor", ylabel="%", xlabel="Hora",
+            title="Carga de la CPU vs. Tiempo", smooth=True)
+fig.show()
+
+## Grafica de temperatura de la CPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "cpu_temp", "monitor", ylabel="C", xlabel="Hora",
+            title="Temperatura de la CPU vs. Tiempo", smooth=True)
+fig.show()
+
+## Grafica de frecuencia de la CPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "cpu_freq", "monitor", ylabel="Hz", xlabel="Hora",
+            title="Frecuencia de la CPU vs. Tiempo", smooth=True)
+fig.show()
+
+## Grafica de uso de la GPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "gpu_load", "monitor", ylabel="%", xlabel="Hora",
+            title="Carga de la GPU vs. Tiempo")
+fig.show()
+
+## Grafica de temperatura de la GPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "gpu_temp", "monitor", ylabel="C", xlabel="Hora",
+            title="Temperatura de la GPU vs. Tiempo")
+fig.show()
+
+## Grafica de uso de memoria de la GPU
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "gpu_memory_usage", "monitor", ylabel="Bytes", xlabel="Hora",
+            title="Uso de memoria de la GPU vs. Tiempo")
+fig.show()
+
+## Grafica de consumo de potencia
+
+fig, axes = plt.subplots()
+show_metric(axes, "relative_hour", "Power", "power", ylabel="W", xlabel="Hora",
+            title="Consumo de potencia vs. Tiempo")
+fig.show()
 
 ##
 
@@ -235,8 +235,24 @@ def stable_consumption(ax: plt.Axes):
     ax.set_ylabel("Hora")
 
 
-fig, axes = plt.subplots()
-stable_consumption(axes)
-fig.savefig(os.path.join(base_dir, "Consumo regular", "grafica.png"))
+# fig, axes = plt.subplots()
+# stable_consumption(axes)
+# fig.savefig(os.path.join(base_dir, "Consumo regular", "grafica.png"))
+
+##
+
+
+def stats_hashrate():
+    for coin_name, data in coins.items():
+        df_monitor = data["monitor"].copy()
+        df_monitor_hashrate = df_monitor[df_monitor["hashrate"] > 0]
+        df_monitor_reported_hashrate = df_monitor[df_monitor["reported_hashrate"] > 0]
+        profile = ProfileReport(df_monitor_hashrate, title=f"Profile Report Hashrate {coin_name}", config_file="./Data/default.yaml")
+        profile.to_file(os.path.join(base_dir, coin_name, "hashrate.html"))
+        profile = ProfileReport(df_monitor_reported_hashrate, title=f"Profile Report Reported Hashrate {coin_name}", config_file="./Data/default.yaml")
+        profile.to_file(os.path.join(base_dir, coin_name, "reported_hashrate.html"))
+
+stats_hashrate()
+
 
 
